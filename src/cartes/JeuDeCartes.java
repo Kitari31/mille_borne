@@ -1,6 +1,7 @@
 package cartes;
 
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.List;
 
 public class JeuDeCartes {
@@ -57,6 +58,8 @@ public class JeuDeCartes {
         for (int i = 0; i < NOMBRE_VEHICULE_PRIORITAIRE; i++) {
             listeCartes.add(new Botte(i + 1, Probleme.Type.FEU));
         }
+        
+        Collections.shuffle(listeCartes);
     }
 
     public List<Carte> getListeCartes() {

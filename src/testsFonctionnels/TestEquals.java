@@ -29,8 +29,8 @@ public class TestEquals {
 		Carte reparation = new Parade(1,Type.ACCIDENT);
 		
 		
-		Carte borne10 = new Borne(10,1);
-		Carte borne100 = new Borne(100,1);
+		Carte borne10 = new Borne(1,10);
+		Carte borne100 = new Borne(1,100);
 		
 		//Les premiers doivent être true les autres false
 		affichage(borne10, borne10);

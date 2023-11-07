@@ -16,10 +16,11 @@ public class Borne extends Carte {
 		this.km = km;
 	}
 	
-	public boolean equals(Object obj) {
-		if(obj instanceof Borne) {
-			return this.km == ((Borne) obj).km;
+	@Override
+	public boolean equals(Object carte) {
+		if(super.equals(carte) && carte instanceof Borne) {
+			return this.km == ((Borne) carte).km;
 		}
 		return false;
-}
+	}
 }

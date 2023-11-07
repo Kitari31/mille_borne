@@ -16,6 +16,6 @@ public abstract class Carte {
 	}
 	
 	public boolean equals(Object carte) {
-        return this.getClass()==carte.getClass();
-    }
+		return  this.getClass()==carte.getClass();
+	}
 }

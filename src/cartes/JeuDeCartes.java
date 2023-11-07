@@ -62,4 +62,61 @@ public class JeuDeCartes {
     public List<Carte> getListeCartes() {
         return listeCartes;
     }
+    
+    public boolean check_count() {
+        int countFeuRouge = 0;
+        int countEssence = 0;
+        int countCrevaison = 0;
+        int countAccident = 0;
+        int countCiterneEssence = 0;
+        int countIncrevable = 0;
+        int countAsDuVolant = 0;
+        int countVehiculePrioritaire = 0;
+
+        for (Carte carte : listeCartes) {
+            if (carte instanceof Attaque) {
+                Attaque attaque = (Attaque) carte;
+                switch (attaque.getType()) {
+                    case FEU:
+                        countFeuRouge++;
+                        break;
+                    case ESSENCE:
+                        countEssence++;
+                        break;
+                    case CREVAISON:
+                        countCrevaison++;
+                        break;
+                    case ACCIDENT:
+                        countAccident++;
+                        break;
+                }
+            } else if (carte instanceof Botte) {
+                Botte botte = (Botte) carte;
+                switch (botte.getType()) {
+                    case ESSENCE:
+                        countCiterneEssence++;
+                        break;
+                    case CREVAISON:
+                        countIncrevable++;
+                        break;
+                    case ACCIDENT:
+                        countAsDuVolant++;
+                        break;
+                    case FEU:
+                        countVehiculePrioritaire++;
+                        break;
+                }
+            }
+        }
+
+        return countFeuRouge == NOMBRE_FEU_ROUGE &&
+               countEssence == NOMBRE_ESSENCE &&
+               countCrevaison == NOMBRE_CREVAISON &&
+               countAccident == NOMBRE_ACCIDENT &&
+               countCiterneEssence == NOMBRE_CITERNE_ESSENCE &&
+               countIncrevable == NOMBRE_INCREVABLE &&
+               countAsDuVolant == NOMBRE_AS_DU_VOLANT &&
+               countVehiculePrioritaire == NOMBRE_VEHICULE_PRIORITAIRE;
+    }
+
 }

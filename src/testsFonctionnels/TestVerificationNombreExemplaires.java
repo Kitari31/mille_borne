@@ -1,17 +1,16 @@
 package testsFonctionnels;
 
-import cartes.Carte;
 import cartes.JeuDeCartes;
-import cartes.Attaque;
 
 public class TestVerificationNombreExemplaires {
+
     public static void main(String[] args) {
         JeuDeCartes jeuDeCartes = new JeuDeCartes();
 
-        if (jeuDeCartes.checkCount()) {
-            System.out.println("Tous les nombres d'exemplaires sont corrects.");
+        if (jeuDeCartes.check_count()) {
+            System.out.println("Le jeu de cartes est correctement configuré.");
         } else {
-            System.out.println("Des erreurs ont été trouvées dans les nombres d'exemplaires.");
+            System.out.println("Le jeu de cartes est mal configuré.");
         }
     }
 }

@@ -30,11 +30,11 @@ public class Utils {
         return element;
     }
 
-    public static <T> List<T> mélanger(List<T> liste) {
-        List<T> résultat = new ArrayList<>(liste);
-        Collections.shuffle(résultat);
+    public static <T> List<T> melanger(List<T> liste) {
+        List<T> resultat = new ArrayList<>(liste);
+        Collections.shuffle(resultat);
         liste.clear();
-        return résultat;
+        return resultat;
     }
 
     public static <T> boolean verifierMelange(List<T> liste1, List<T> liste2) {
@@ -44,41 +44,41 @@ public class Utils {
     }
 
     public static <T> List<T> rassembler(List<T> liste) {
-        List<T> résultat = new ArrayList<>();
+        List<T> resultat = new ArrayList<>();
         if (liste.isEmpty()) {
-            return résultat;
+            return resultat;
         }
 
-        T précédent = liste.get(0);
-        résultat.add(précédent);
+        T precedent = liste.get(0);
+        resultat.add(precedent);
 
         for (int i = 1; i < liste.size(); i++) {
             T actuel = liste.get(i);
-            if (!actuel.equals(précédent)) {
-                résultat.add(actuel);
-                précédent = actuel;
+            if (!actuel.equals(precedent)) {
+            	resultat.add(actuel);
+                precedent = actuel;
             }
         }
 
-        return résultat;
+        return resultat;
     }
 
-    public static <T> boolean verifierRassemblement(List<T> listeRassemblee, List<T> listeMélangée) {
-        if (listeRassemblee.size() > listeMélangée.size()) {
+    public static <T> boolean verifierRassemblement(List<T> listeRassemblee, List<T> listemelangee) {
+        if (listeRassemblee.size() > listemelangee.size()) {
             return false;
         }
 
         int i = 0;
-        for (T élémentRassemblee : listeRassemblee) {
-            while (i < listeMélangée.size()) {
-                if (listeMélangée.get(i).equals(élémentRassemblee)) {
+        for (T elementRassemblee : listeRassemblee) {
+            while (i < listemelangee.size()) {
+                if (listemelangee.get(i).equals(elementRassemblee)) {
                     i++;
                     break;
                 }
                 i++;
             }
 
-            if (i >= listeMélangée.size() && !élémentRassemblee.equals(listeMélangée.get(listeMélangée.size() - 1))) {
+            if (i >= listemelangee.size() && !elementRassemblee.equals(listemelangee.get(listemelangee.size() - 1))) {
                 return false;
             }
         }

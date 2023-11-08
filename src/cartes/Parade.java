@@ -16,7 +16,7 @@ public class Parade extends Bataille {
 		case CREVAISON:
 			return "ROUE DE SECOURS";
 		case ACCIDENT:
-			return "RÉPARATIONS";
+			return "REPARATIONS";
 		default:
 			throw new IllegalArgumentException("Valeur non valable: " + this.getType());
 		}

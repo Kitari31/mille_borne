@@ -101,16 +101,16 @@ public class Joueur {
             return 200; // Pile de limites vide, limite de vitesse de 200
         }
         
-        // Vérification des cartes spécifiques en haut de la pile
+        // Verification des cartes specifiques en haut de la pile
         Carte sommet = pileLimitesVitesse.get(pileLimitesVitesse.size() - 1);
         if (sommet instanceof DebutLimite) {
             return 50; // La limite est de 50 si le sommet est une FinLimite ou une DebutLimite
         }
         
-        return 200; // Par défaut, la limite est de 200
+        return 200; // Par defaut, la limite est de 200
     }
 
-    // Méthode pour vérifier si le joueur a la botte de type FEU
+    // Methode pour verifier si le joueur a la botte de type FEU
     private boolean aLaBotteDeTypeFEU(List<Carte> ensembleBottes) {
         for (Carte botte : ensembleBottes) {
             if (botte instanceof Botte && ((Botte) botte).getType() == Probleme.Type.FEU) {

@@ -66,7 +66,7 @@ public class JeuDeCartes {
         return listeCartes;
     }
     
-    public boolean check_count() {
+    public boolean checkCount() {
         int countFeuRouge = 0;
         int countEssence = 0;
         int countCrevaison = 0;

@@ -1,4 +1,4 @@
-package testsFonctionnels;
+package testsfonctionnels;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -13,7 +13,7 @@ public class TestEstBloque {
         // Test 1 : Le joueur a un "Feu Rouge". Doit renvoyer true.
         testerEstBloque(joueur, true);
 
-        // Test 2 : Le joueur a un "Véhicule Prioritaire". Doit renvoyer false.
+        // Test 2 : Le joueur a un "Vehicule Prioritaire". Doit renvoyer false.
         testerEstBloque(joueur, false);
 
         // Test 3 : Le joueur a un "Accident". Doit renvoyer true.
@@ -41,7 +41,7 @@ public class TestEstBloque {
         testerEstBloque(joueur, false);
     }
 
-    // Crée un joueur de test avec des cartes spécifiques dans sa main.
+    // Cree un joueur de test avec des cartes specifiques dans sa main.
     public static Joueur creerJoueurDeTest() {
         List<Carte> pileLimitesVitesse = new ArrayList<>();
         List<Carte> pileBataille = new ArrayList<>();
@@ -51,19 +51,19 @@ public class TestEstBloque {
 
         // Ajouter des cartes à la main du joueur.
         joueur.donner(new Attaque(1, Probleme.Type.FEU));  // Feu Rouge
-        joueur.donner(new Botte(1, Probleme.Type.FEU));    // Véhicule Prioritaire
+        joueur.donner(new Botte(1, Probleme.Type.FEU));    // Vehicule Prioritaire
         joueur.donner(new Attaque(1, Probleme.Type.ACCIDENT));
-        joueur.donner(new Botte(1, Probleme.Type.AS_DU_VOLANT));
-        joueur.donner(new Attaque(1, Probleme.Type.PANNE_ESSENCE));
+        joueur.donner(new Botte(1, Probleme.Type.ACCIDENT));
+        joueur.donner(new Attaque(1, Probleme.Type.ESSENCE));
         joueur.donner(new Parade(1, Probleme.Type.ESSENCE));
         joueur.donner(new Botte(1, Probleme.Type.FEU));
 
         return joueur;
     }
 
-    // Teste la méthode estBloque et affiche le résultat.
+    // Teste la méthode estBloque et affiche le resultat.
     public static void testerEstBloque(Joueur joueur, boolean expectedResult) {
         boolean estBloque = joueur.estBloque();
-        System.out.println("estBloque renvoie " + estBloque + ". Résultat attendu : " + expectedResult);
+        System.out.println("estBloque renvoie " + estBloque + ". Resultat attendu : " + expectedResult);
     }
 }

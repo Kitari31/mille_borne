@@ -1,4 +1,4 @@
-package testsFonctionnels;
+package testsfonctionnels;
 import jeu.*;
 import cartes.*;
 import java.util.ArrayList;

@@ -1,4 +1,4 @@
-package testsFonctionnels;
+package testsfonctionnels;
 
 import jeu.*;
 
@@ -25,7 +25,7 @@ public class TestCartes {
 		sabot.ajouterFamilleCarte(familleAccident, familleReparation);
 		
 		
-		// Utilisation d'un itérateur et remove
+		// Utilisation d'un iterateur et remove
 		Iterator<Carte> iterator = sabot.iterator();
         while (iterator.hasNext()) {
             Carte cartePiochee = iterator.next();
@@ -38,13 +38,13 @@ public class TestCartes {
 		Carte familleAsDuVolant = new Botte(1,Type.ACCIDENT);
 		sabot.ajouterFamilleCarte(familleAsDuVolant);
 		
-		//Parcours des éléments de Sabot
+		//Parcours des elements de Sabot
 		for(Carte c:sabot) {
-			//On déclence l'erreur concurent
+			//On declence l'erreur concurent
 			try {
 	            System.out.println("Je pioche " + sabot.piocher());
 	        } catch (ConcurrentModificationException e) {
-	            System.out.println("Exception levée : " + e.getMessage());
+	            System.out.println("Exception levee : " + e.getMessage());
 	        }
 			
 		}

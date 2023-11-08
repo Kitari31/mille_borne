@@ -42,5 +42,7 @@ public class TestJoueur {
 		System.out.println(joueur1.getMain().getCarteEnMain());
 		System.out.println(joueur2.getMain().getCarteEnMain());
 		System.out.println(joueur3.getMain().getCarteEnMain());
+		
+		//Test Question 3-7
 	}
 }

@@ -2,7 +2,7 @@ package jeu;
 
 import java.util.List;
 
-import cartes.Carte;
+import cartes.*;
 
 public class Joueur {
 	private String nom;
@@ -11,6 +11,7 @@ public class Joueur {
 	private List<Carte> collectionBornes;
 	private List<Carte> ensembleBottes;
 	private Main main;
+	private int kmParcourus;
 
 	public Joueur(String nom, List<Carte> pileLimitesVitesse, List<Carte> pileBataille, List<Carte> collectionBornes,
 			List<Carte> ensembleBottes) {
@@ -20,6 +21,7 @@ public class Joueur {
 		this.collectionBornes = collectionBornes;
 		this.ensembleBottes = ensembleBottes;
 		this.main = new MainAsListe();
+		this.kmParcourus = kmParcourus;
 	}
 
 	public String getNom() {
@@ -29,7 +31,11 @@ public class Joueur {
 	public Main getMain() {
 		return main;
 	}
-
+	
+	public int getKm() {
+		return kmParcourus;
+	}
+	
 	public List<Carte> getPileLimitesVitesse() {
 		return pileLimitesVitesse;
 	}
@@ -77,4 +83,12 @@ public class Joueur {
 			return null;
 		}
 	}
+	
+	public void ajouterKM(int km) {
+        kmParcourus += km;
+    }
+	
+	public void jouerBorne(Borne borne) {
+        ajouterKM(borne.getKm());
+    }
 }

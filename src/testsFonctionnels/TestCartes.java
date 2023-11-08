@@ -1,27 +1,58 @@
 package testsFonctionnels;
 
-import jeu.Sabot;
+import jeu.*;
+
+import java.util.ConcurrentModificationException;
 import java.util.Iterator;
+
 import cartes.*;
+import cartes.Probleme.Type;
 
 public class TestCartes {
-    public static void main(String[] args) {
-        // Créez un sabot
-        Sabot sabot = new Sabot();
+	
+	public static void affichage(Carte probleme) {
+		StringBuilder message = new StringBuilder();
+		message.append("Je pioche ");
+		message.append(probleme.toString());
+		System.out.println(message);
+	}
 
-        // Ajoutez les familles de cartes "accident", "réparation" et "asDuVolant"
-        Carte accident = new Attaque(3, Probleme.Type.ACCIDENT);
-        Carte reparation = new Parade(3, Probleme.Type.ACCIDENT);
-        Carte asDuVolant = new Botte(1, Probleme.Type.ACCIDENT);
-
-        sabot.ajouterFamilleCarte(accident, reparation, asDuVolant);
-
-        // Utilisez un itérateur pour piocher et afficher les cartes du sabot jusqu'à ce qu'il soit vide
-        Iterator<Carte> iterator = sabot.iterator();
+	public static void main(String[] args) {
+		Carte familleAccident = new Attaque(2,Type.ACCIDENT);
+		Carte familleReparation = new Parade(3,Type.ACCIDENT);
+		
+		Sabot sabot = new Sabot();
+		sabot.ajouterFamilleCarte(familleAccident, familleReparation);
+		
+		
+		// Utilisation d'un itérateur et remove
+		Iterator<Carte> iterator = sabot.iterator();
         while (iterator.hasNext()) {
             Carte cartePiochee = iterator.next();
             System.out.println("je pioche " + cartePiochee);
             iterator.remove();
+            
         }
-    }
+		
+		// Ajout de "As du volant" et tentative de piocher
+		Carte familleAsDuVolant = new Botte(1,Type.ACCIDENT);
+		sabot.ajouterFamilleCarte(familleAsDuVolant);
+		
+		//Parcours des éléments de Sabot
+		for(Carte c:sabot) {
+			//On déclence l'erreur concurent
+			try {
+	            System.out.println("Je pioche " + sabot.piocher());
+	        } catch (ConcurrentModificationException e) {
+	            System.out.println("Exception levée : " + e.getMessage());
+	        }
+			
+		}
+		
+		
+
+
+
+	}
+
 }

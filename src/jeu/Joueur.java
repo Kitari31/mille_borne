@@ -93,11 +93,21 @@ public class Joueur {
     }
     
     public int getLimite(List<Carte> pileLimitesVitesse) {
-        if (pileLimitesVitesse.isEmpty() || pileLimitesVitesse.get(pileLimitesVitesse.size() - 1) instanceof FinLimite || prioritaire) {
-            return 200;
-        } else {
-            return 50;
+        if (aLaBotteDeTypeFEU(ensembleBottes)) {
+            return 200; // Joueur a la botte de type FEU, limite de vitesse de 200
         }
+        
+        if (pileLimitesVitesse.isEmpty()) {
+            return 200; // Pile de limites vide, limite de vitesse de 200
+        }
+        
+        // Vérification des cartes spécifiques en haut de la pile
+        Carte sommet = pileLimitesVitesse.get(pileLimitesVitesse.size() - 1);
+        if (sommet instanceof DebutLimite) {
+            return 50; // La limite est de 50 si le sommet est une FinLimite ou une DebutLimite
+        }
+        
+        return 200; // Par défaut, la limite est de 200
     }
 
     // Méthode pour vérifier si le joueur a la botte de type FEU
@@ -109,5 +119,42 @@ public class Joueur {
         }
         return false;
     }
+    
+    public boolean estBloque() {
+        // La pile de bataille est vide et le joueur est prioritaire.
+        if (pileBataille.isEmpty() && prioritaire) {
+            return false;
+        }
+
+        // Vérification si le sommet est une parade de type FEU.
+        if (!pileBataille.isEmpty() && pileBataille.get(pileBataille.size() - 1) instanceof Parade
+                && ((Parade) pileBataille.get(pileBataille.size() - 1)).getType() == Probleme.Type.FEU) {
+            return false;
+        }
+
+        // Le sommet est une parade et le joueur est prioritaire.
+        if (!pileBataille.isEmpty() && pileBataille.get(pileBataille.size() - 1) instanceof Parade && prioritaire) {
+            return false;
+        }
+
+        // Le sommet est une attaque de type FEU et le joueur est prioritaire.
+        if (!pileBataille.isEmpty() && pileBataille.get(pileBataille.size() - 1) instanceof Attaque
+                && ((Attaque) pileBataille.get(pileBataille.size() - 1)).getType() == Probleme.Type.FEU && prioritaire) {
+            return false;
+        }
+
+        // Le sommet est une attaque d'un autre type pour lequel le joueur a une botte et il est prioritaire.
+        if (!pileBataille.isEmpty() && pileBataille.get(pileBataille.size() - 1) instanceof Attaque && prioritaire) {
+            Attaque attaque = (Attaque) pileBataille.get(pileBataille.size() - 1);
+            for (Carte botte : ensembleBottes) {
+                if (botte instanceof Botte && ((Botte) botte).getType() == attaque.getType()) {
+                    return false;
+                }
+            }
+        }
+
+        return true; // Si aucune des conditions pour avancer n'est remplie, le joueur est bloqué.
+    }
+
 }
 

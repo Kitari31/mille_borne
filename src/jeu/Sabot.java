@@ -1,95 +1,122 @@
 package jeu;
+import cartes.*;
 
-import cartes.Carte;
+import java.util.ConcurrentModificationException;
 import java.util.Iterator;
 import java.util.NoSuchElementException;
 
-public class Sabot implements Iterable<Carte> {
-    private Carte[] cartes;
-    private int nbCartes;
+public class Sabot implements Iterable<Carte>{
+	private Carte [] tableauDeCartes;
+	private int nbCartes;
+	Iterator<Carte> iterator = iterator();
 
-    public Sabot() {
-        this.cartes = new Carte[110];
-        this.nbCartes = 0;
-    }
-    
-    public int getNbCartes() {
-        return nbCartes;
-    }
-
-    public Carte[] getCartes() {
-        return cartes;
-    }
-    
-    public boolean estVide() {
-        return nbCartes == 0;
-    }
-    
-    public void ajouterCarte(Carte carte) {
-        if (nbCartes < cartes.length) {
-            cartes[nbCartes] = carte;
-            nbCartes++;
-        } else {
-            System.out.println("Le sabot est plein, impossible d'ajouter plus de cartes.");
-        }
-    }
-    
-    public void ajouterFamilleCarte(Carte carte) {
+	public Sabot() {
+		this.tableauDeCartes = new Carte[110];
+		this.nbCartes = 0;
+	}
+	
+	public boolean estVide() {
+		return nbCartes ==0;
+	}
+	
+	private void ajouterCarte(Carte carte) {
+		if(nbCartes ==110) {
+			throw new ArrayIndexOutOfBoundsException();
+		}else {
+			tableauDeCartes[nbCartes] = carte;
+			nbCartes++;
+		}
+	}
+	
+	//C'est une surcharge avec les plusieurs cartes
+	public void ajouterFamilleCarte(Carte carte) {
 		int nbrFamille = carte.getNombre();
 		for (int i = 0; i < nbrFamille; i++) {
 			ajouterCarte(carte);
 		}
 	}
-    
-    public void ajouterFamilleCarte(Carte... args) {
+	
+	//Varargs
+	public void ajouterFamilleCarte(Carte... args) {
 		for (Carte carte : args){
 			ajouterFamilleCarte(carte);
 		}
 	}
-    
-    public Carte piocher() {
-        Iterator<Carte> iterator = iterator();
+	
+	public Carte piocher() {
         if (iterator.hasNext()) {
             Carte cartePiochee = iterator.next();
-            iterator.remove(); // Supprime la carte du sabot
+            iterator.remove();
             return cartePiochee;
         } else {
             throw new NoSuchElementException("Le sabot est vide, impossible de piocher.");
         }
     }
-    
-    @Override
+	
+	////////////////////////////////
+	//Les Méthodes de l'itération//
+	//////////////////////////////
+	@Override
     public Iterator<Carte> iterator() {
         return new SabotIterator();
     }
+	
+	
 
-    private class SabotIterator implements Iterator<Carte> {
-        private int index = 0;
+	
+	///////////////////
+	//Classe interne//
+	/////////////////
+	
+	private class SabotIterator implements Iterator<Carte> {
+        private int indiceIterator = 0;
+        private boolean nextEffectue = false;
+        private int nbCarteReference = nbCartes;
+        
+        public void verifOccurence() {
+        	if (nbCarteReference != nbCartes) {
+				throw new ConcurrentModificationException("Il y a plusieurs itérateurs");
+			}
+        }
+        
 
         @Override
         public boolean hasNext() {
-            return index < nbCartes;
+        	nextEffectue = false;        	
+    		return indiceIterator < nbCartes;
         }
 
         @Override
-        public Carte next() {
-            if (!hasNext()) {
-                return null;
-            }
-            return cartes[index++];
-        }
+    	public Carte next() {
+        	verifOccurence();
+    		if(!hasNext()) {
+    			throw new NoSuchElementException("Il n'y a plus d'éléments next");
+    		}else{
+    			Carte carte = tableauDeCartes[indiceIterator];
+    			indiceIterator++;
+    			nextEffectue = true;
+    			return carte;
+    		}
+    	}
         
         @Override
         public void remove() {
-            if (index <= 0) {
-                throw new IllegalStateException("Vous ne pouvez pas supprimer avant d'appeler next.");
+        	verifOccurence();
+            if (nbCartes < 1) {
+                throw new IllegalStateException("Il n'y a pas de cartes à retirer");
+            } else if (!nextEffectue) {
+                throw new IllegalStateException("not nextEffectue");
+            } else {
+            	//On décale tout le tableau
+            	for(int i = indiceIterator-1 ; i<109 ; i++) {
+            		tableauDeCartes[i] = tableauDeCartes[i+1];
+            	}
+                nextEffectue = false;
+                nbCartes--;
+                nbCarteReference--;
+                indiceIterator--;
             }
-            for (int i = index - 1; i < nbCartes - 1; i++) {
-                cartes[i] = cartes[i + 1];
-            }
-            cartes[nbCartes - 1] = null;
-            nbCartes--;
-            index--;
         }
-    }
+
+	}
 }

@@ -26,6 +26,13 @@ public class TestGetLimite {
         joueur = creerJoueurAvecBottes(ensembleBottes);
         int limite3 = joueur.getLimite(pileLimitesVide);
         System.out.println("Limite (joueur prioritaire) : " + limite3);
+        
+     // Configuration 4 : Pile de limites non vide, joueur non prioritaire
+        List<Carte> pileLimitesNonVide = new ArrayList<>();
+        Joueur joueur2 = creerJoueur();
+        pileLimitesNonVide.add(new DebutLimite(100));
+        int limite4 = joueur2.getLimite(pileLimitesNonVide);
+        System.out.println("Limite (pile non vide, joueur non prioritaire) : " + limite4);
     }
 
     private static Joueur creerJoueur() {

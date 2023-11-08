@@ -1,35 +1,46 @@
 package testsfonctionnels;
 
-import jeu.*;
-import cartes.*;
 import java.util.ArrayList;
 
+import cartes.*;
+import jeu.Joueur;
+
 public class TestJoueur {
-    public static void main(String[] args) {
-        // Creation d'un joueur
-        Joueur joueur = creerJoueur();
-
-        // Ajout de bornes pour tester le kilometrage
-        ajouterBornesAuJoueur(joueur);
-
-        // Verification du kilometrage
-        int kilometrage = joueur.getKM();
-        System.out.println("Kilometrage du joueur : " + kilometrage + " km");
-    }
-
-    private static Joueur creerJoueur() {
-        // Creation d'un joueur avec des listes vides pour les attributs
-        return new Joueur("Joueur 1", new ArrayList<>(), new ArrayList<>(), new ArrayList<>(), new ArrayList<>());
-    }
-
-    private static void ajouterBornesAuJoueur(Joueur joueur) {
-        // Creation de quelques cartes Borne et ajout au joueur
-        Borne borne1 = new Borne(1, 50);
-        Borne borne2 = new Borne(2, 100);
-        Borne borne3 = new Borne(3, 150);
-
-        joueur.jouerBorne(borne1);
-        joueur.jouerBorne(borne2);
-        joueur.jouerBorne(borne3);
-    }
+	public static void main(String[] args) {
+		Joueur joueur1 = new Joueur("Joueur 1", new ArrayList<>(), new ArrayList<>(), new ArrayList<>(), new ArrayList<>());
+		
+		//Test Question1
+		System.out.println(joueur1.getNom());
+		System.out.println(joueur1.getCollectionBornes());
+		System.out.println(joueur1.getEnsembleBottes());
+		System.out.println(joueur1.getPileBataille());
+		System.out.println(joueur1.getPileLimitesVitesse());
+		
+		//Test Question2
+		Joueur joueur2 = new Joueur("Joueur 2", new ArrayList<>(), new ArrayList<>(), new ArrayList<>(), new ArrayList<>());
+		Joueur joueur3 = new Joueur("Joueur 1", new ArrayList<>(), new ArrayList<>(), new ArrayList<>(), new ArrayList<>());
+		
+		System.out.println(joueur2.toString());
+		System.out.println(joueur1.toString());
+		System.out.println(joueur2.equals(joueur1));
+		System.out.println(joueur3.toString());
+		System.out.println(joueur1.toString());
+		System.out.println(joueur3.equals(joueur1));
+		
+		//Test Question 3-6
+		JeuDeCartes jeuDeCartes = new JeuDeCartes();
+		System.out.println(jeuDeCartes.getListeCartes());
+		System.out.println(joueur1.prendreCarte(jeuDeCartes.getListeCartes()));
+		System.out.println(joueur2.prendreCarte(jeuDeCartes.getListeCartes()));
+		System.out.println(joueur3.prendreCarte(jeuDeCartes.getListeCartes()));
+		System.out.println(joueur1.prendreCarte(jeuDeCartes.getListeCartes()));
+		System.out.println(joueur2.prendreCarte(jeuDeCartes.getListeCartes()));
+		System.out.println(joueur3.prendreCarte(jeuDeCartes.getListeCartes()));
+		System.out.println(joueur1.prendreCarte(jeuDeCartes.getListeCartes()));
+		System.out.println(joueur2.prendreCarte(jeuDeCartes.getListeCartes()));
+		System.out.println(joueur3.prendreCarte(jeuDeCartes.getListeCartes()));
+		System.out.println(joueur1.getMain().getCarteEnMain());
+		System.out.println(joueur2.getMain().getCarteEnMain());
+		System.out.println(joueur3.getMain().getCarteEnMain());
+	}
 }

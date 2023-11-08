@@ -1,6 +1,5 @@
 package testsfonctionnels;
 
-import jeu.*;
 import cartes.*;
 import cartes.Probleme.Type;
 
@@ -32,7 +31,7 @@ public class TestEquals {
 		Carte borne10 = new Borne(1,10);
 		Carte borne100 = new Borne(1,100);
 		
-		//Les premiers doivent être true les autres false
+		//Les premiers doivent etre true les autres false
 		affichage(borne10, borne10);
 		affichage(borne100, borne100);
 		affichage(citerne, citerne);

@@ -15,12 +15,19 @@ public class MainAsListe implements Main {
 
     @Override
     public void jouer(Carte carte) {
-        assert cartesEnMain.contains(carte) : "La carte n'est pas dans la main.";
-        cartesEnMain.remove(carte);
+    	try{
+    		cartesEnMain.remove(carte);
+        } catch(Exception e ){
+            System.out.println("La carte n'est pas dans la main");
+        }
     }
 
     @Override
     public Iterator<Carte> iterator() {
         return cartesEnMain.iterator();
+    }
+    
+    public List<Carte> getCarteEnMain(){
+    	return cartesEnMain;
     }
 }

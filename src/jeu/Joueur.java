@@ -91,4 +91,19 @@ public class Joueur {
 	public void jouerBorne(Borne borne) {
         ajouterKM(borne.getKm());
     }
+
+	public int getlimite() {
+		if(pileLimitesVitesse.isEmpty()) {
+			return 200;
+		}
+		Carte sommetPile = pileLimitesVitesse.get(pileLimitesVitesse.size() - 1);
+		if(sommetPile instanceof FinLimite) {
+			return 200;
+		}
+		if (ensembleBottes.stream().anyMatch(carte -> carte instanceof Botte && ((Botte) carte).getType() == Probleme.Type.FEU)) {
+	        return 200;
+	    }
+		return 50;
+	}
+
 }

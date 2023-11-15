@@ -1,6 +1,7 @@
 package testsfonctionnels;
 
 import java.util.ArrayList;
+import java.util.List;
 
 import cartes.*;
 import jeu.Joueur;
@@ -43,6 +44,28 @@ public class TestJoueur {
 		System.out.println(joueur2.getMain().getCarteEnMain());
 		System.out.println(joueur3.getMain().getCarteEnMain());
 		
-		//Test Question 3-7
+		//Test Question 3-8
+		Borne borne1 = new Borne(1,50);
+		Borne borne2 = new Borne(1,100);
+		Borne borne3 = new Borne(1,200);
+		
+		joueur1.jouerBorne(borne1);
+		joueur1.jouerBorne(borne2);
+		joueur1.jouerBorne(borne3);
+		System.out.println(joueur1.getKm());
+		
+		//Test Question 3-10
+		
+		//défault
+		System.out.println(joueur1.getlimite());
+		//sommet = FinLimite
+		Joueur joueurfinlimite = new Joueur("Joueur 4",List.of(new FinLimite(1)), new ArrayList<>(), new ArrayList<>(), new ArrayList<>());
+		System.out.println(joueurfinlimite.getlimite());
+		//Proritaire
+		Joueur joueurPrio = new Joueur("Joueur 4",List.of(new DebutLimite(1)), new ArrayList<>(), new ArrayList<>(), List.of(new Botte(1, Probleme.Type.FEU)));
+		System.out.println(joueurPrio.getlimite());
+		//pile non vide
+		Joueur joueurLimite = new Joueur("Joueur 4",List.of(new DebutLimite(1)), new ArrayList<>(), new ArrayList<>(), new ArrayList<>());
+		System.out.println(joueurLimite.getlimite());
 	}
 }
